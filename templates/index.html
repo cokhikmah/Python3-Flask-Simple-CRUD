@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="background:white">
+  <h1 class="my-4">Python3 Flask | Very Simple CRUD Operation</h1>
+  {% if plan|length < 1 %}
+  <p>Any idea for tomorrow?</p>
+  {% else %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Created At</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for plan in plan %}
+      <tr>
+        <td><a href="/update/{{ plan.id }}">{{ plan.name }}</a></td>
+        <td>{{ plan.created_at.date() }}</td>
+        <td class="text-right"><a class="btn btn-danger btn-sm" href="/delete/{{ plan.id }}" role="button">Remove</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% include 'snippets/form.html' %}
+</div>
+{% endblock content %}
